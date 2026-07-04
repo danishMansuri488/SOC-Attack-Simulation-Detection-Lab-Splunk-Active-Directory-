@@ -1,13 +1,17 @@
 # SPL Queries
 
-This document contains the Search Processing Language (SPL) queries used in the **SOC Attack Simulation & Detection Lab using Splunk Enterprise, Active Directory & Sysmon**.
+## Project
+**SOC Attack Simulation & Detection Lab using Splunk Enterprise, Active Directory & Sysmon**
+
+This document contains the Search Processing Language (SPL) queries used to monitor Windows Security Events, build dashboards, and configure alerts in Splunk Enterprise.
 
 ---
 
-# 1. Successful Logins
+## Dashboard Queries
 
-### Objective
-Monitor successful user authentication.
+### 1. Successful Logins (Event ID 4624)
+
+**Purpose:** Monitor successful user authentication.
 
 ```spl
 index=main EventCode=4624
@@ -15,10 +19,9 @@ index=main EventCode=4624
 
 ---
 
-# 2. Failed Logins
+### 2. Failed Logins (Event ID 4625)
 
-### Objective
-Detect failed authentication attempts.
+**Purpose:** Detect failed authentication attempts.
 
 ```spl
 index=main EventCode=4625
@@ -26,10 +29,9 @@ index=main EventCode=4625
 
 ---
 
-# 3. Failed Login Trend
+### 3. Failed Login Trend
 
-### Objective
-Visualize failed login attempts over time.
+**Purpose:** Visualize failed login attempts over time.
 
 ```spl
 index=main EventCode=4625
@@ -38,10 +40,9 @@ index=main EventCode=4625
 
 ---
 
-# 4. New User Created
+### 4. New User Created (Event ID 4720)
 
-### Objective
-Monitor newly created user accounts.
+**Purpose:** Detect newly created user accounts.
 
 ```spl
 index=main EventCode=4720
@@ -49,10 +50,9 @@ index=main EventCode=4720
 
 ---
 
-# 5. User Account Enabled
+### 5. User Enabled (Event ID 4722)
 
-### Objective
-Detect user account activation.
+**Purpose:** Monitor enabled user accounts.
 
 ```spl
 index=main EventCode=4722
@@ -60,10 +60,9 @@ index=main EventCode=4722
 
 ---
 
-# 6. Password Reset
+### 6. Password Reset (Event ID 4724)
 
-### Objective
-Monitor password reset activities.
+**Purpose:** Detect password reset operations.
 
 ```spl
 index=main EventCode=4724
@@ -71,10 +70,9 @@ index=main EventCode=4724
 
 ---
 
-# 7. Privileged Group Changes
+### 7. Privileged Group Changes (Event ID 4728)
 
-### Objective
-Detect users added to privileged groups.
+**Purpose:** Detect users added to privileged groups.
 
 ```spl
 index=main EventCode=4728
@@ -82,10 +80,9 @@ index=main EventCode=4728
 
 ---
 
-# 8. Latest Security Events
+### 8. Latest Security Events
 
-### Objective
-Display the latest security events.
+**Purpose:** Display the latest collected security events.
 
 ```spl
 index=main
@@ -95,10 +92,9 @@ index=main
 
 ---
 
-# 9. Top Event Codes
+### 9. Top Event Codes
 
-### Objective
-Display the most frequently occurring Event IDs.
+**Purpose:** Display the most frequent Windows Event IDs.
 
 ```spl
 index=main
@@ -107,10 +103,11 @@ index=main
 
 ---
 
-# 10. Brute Force Detection Alert
+## Alert Queries
 
-### Objective
-Detect multiple failed login attempts.
+### 10. Brute Force Detection Alert
+
+**Purpose:** Trigger an alert when failed login attempts exceed the defined threshold.
 
 ```spl
 index=main EventCode=4625
@@ -120,10 +117,9 @@ index=main EventCode=4625
 
 ---
 
-# 11. New User Creation Alert
+### 11. New User Creation Alert
 
-### Objective
-Generate an alert when a new user account is created.
+**Purpose:** Trigger an alert when a new user account is created.
 
 ```spl
 index=main EventCode=4720
@@ -131,11 +127,16 @@ index=main EventCode=4720
 
 ---
 
-# 12. Privileged Group Change Alert
+### 12. Privileged Group Change Alert
 
-### Objective
-Generate an alert when a user is added to a privileged group.
+**Purpose:** Trigger an alert when a user is added to a privileged group.
 
 ```spl
 index=main EventCode=4728
 ```
+
+---
+
+## Summary
+
+These SPL queries were developed to support real-time monitoring, dashboard visualization, and automated threat detection within the SOC Attack Simulation & Detection Lab. They enable SOC analysts to identify authentication events, account management activities, and suspicious behavior efficiently using Splunk Enterprise.
